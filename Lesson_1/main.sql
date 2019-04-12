@@ -26,7 +26,7 @@ SET firstName = "Paul"
 WHERE id = 1;
 
 -- Delete rows
-DELETE from profile
+DELETE FROM profile
 WHERE id = 1;
 
 -- Add columns
@@ -65,3 +65,19 @@ SELECT * FROM profile WHERE firstName LIKE 'a%'
 
 -- How to select row with specific country values?
 SELECT * FROM profile WHERE country IN ('Belgium', 'Sweden')
+
+-- Indices. If one needs to search some column often in the future, one could set up an index for that column
+CREATE INDEX CIndex
+ON profile(country);
+-- To drop the index one could write
+DROP INDEX CIndex ON profile;
+
+-- Aggregate functions. SQL provides a set of aggregate functions such as average, min, max and so on
+-- let's find an average age for data in our table
+SELECT AVG(age) FROM profile
+
+-- Groupings. We could group ages
+SELECT age, COUNT(age)
+FROM profile
+GROUP BY age
+HAVING COUNT(age) <= 2
